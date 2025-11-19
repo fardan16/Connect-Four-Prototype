@@ -7,17 +7,15 @@ YUDHO
 */
 
 // [MODUL 1] Pengenalan C++ & Library
-// Menggunakan library standar untuk Input (cin) dan Output (cout)
 #include <iostream> 
 
 using namespace std;
 
 // [MODUL 2] Konstanta, Tipe Data & Variabel
-// Penggunaan 'const' untuk nilai tetap yang tidak boleh berubah
 const int JUMLAH_BARIS = 6;
 const int JUMLAH_KOLOM = 7;
 
-// [MODUL 7] Fungsi & Prosedur (Prototype)
+// [MODUL 7] Fungsi & Prosedur
 // Deklarasi fungsi agar bisa dipanggil dari main()
 void bersihkanLayar();
 void tampilkanTutorial();
@@ -27,24 +25,18 @@ int prosesJatuhkanKeping(char papan[JUMLAH_BARIS][JUMLAH_KOLOM], int kolomPiliha
 bool cekApakahMenang(char papan[JUMLAH_BARIS][JUMLAH_KOLOM], char keping);
 bool cekApakahSeri(int totalLangkah);
 
-// ==========================================
-//             PROGRAM UTAMA
-// ==========================================
+// PROGRAM UTAMA
 int main() {
     // [MODUL 6] Array (Larik)
-    // Implementasi Array 2 Dimensi untuk papan permainan
     char papan[JUMLAH_BARIS][JUMLAH_KOLOM];
     
-    // [MODUL 2] Variabel Integer untuk Skor
     int skorP1 = 0;
     int skorP2 = 0;
     char jawabanMainLagi;
 
-    // Memanggil Prosedur Tutorial Lengkap di awal
     tampilkanTutorial();
 
     // [MODUL 5] Perulangan (Do-While Loop)
-    // Digunakan agar game minimal jalan sekali, lalu cek kondisi main lagi di akhir
     do {
         // Reset papan dan variabel setiap ronde baru
         inisialisasiPapan(papan);
@@ -70,14 +62,14 @@ int main() {
             cin >> inputAngka;
 
             // [MODUL 4] Percabangan (If-Else) & Validasi Input
-            // --- [TAMBAHAN] PENANGANAN INPUT BUKAN ANGKA ---
+            // PENANGANAN INPUT BUKAN ANGKA
             if (cin.fail()) {
-                cin.clear();             // Hapus status error
-                cin.ignore(10000, '\n'); // Buang input ngawur
+                cin.clear();             
+                cin.ignore(10000, '\n');
                 
                 cout << "\n[ERROR] Input harus berupa ANGKA!\n";
                 cout << "Tekan [Enter] untuk mencoba lagi...";
-                cin.get(); // Pause agar pesan terbaca
+                cin.get(); 
                 continue;  // Kembali ke awal loop
             }
 
@@ -93,8 +85,8 @@ int main() {
                 cout << "\n[ERROR] Kolom " << inputAngka << " tidak ada! Pilih 1-7.\n";
                 cout << "Tekan [Enter] untuk mencoba lagi...";
                 
-                cin.ignore(10000, '\n'); // Bersihkan sisa enter sebelumnya
-                cin.get();               // Pause agar pesan terbaca
+                cin.ignore(10000, '\n'); 
+                cin.get();               
                 continue;
             }
 
@@ -106,8 +98,8 @@ int main() {
                 cout << "\n[ERROR] Kolom sudah PENUH! Pilih kolom lain.\n";
                 cout << "Tekan [Enter] untuk lanjut...";
                 
-                cin.ignore(10000, '\n'); // Bersihkan buffer
-                cin.get();               // Pause agar pesan terbaca
+                cin.ignore(10000, '\n'); 
+                cin.get();              
                 
             } 
             else {
@@ -151,10 +143,8 @@ int main() {
             cout << "Apakah ingin main lagi? (y/t): ";
             cin >> jawabanMainLagi;
 
-            // Bersihkan buffer
             if (cin.fail()) { cin.clear(); cin.ignore(10000, '\n'); }
-
-            // Cek apakah inputnya valid
+            
             if (jawabanMainLagi == 'y' || jawabanMainLagi == 'Y' || 
                 jawabanMainLagi == 't' || jawabanMainLagi == 'T') {
                 break; 
@@ -162,7 +152,6 @@ int main() {
                 cout << "[ERROR] Jawaban tidak dikenali! Hanya ketik 'y' atau 't'.\n";
             }
         }
-        // ------------------------------------------------------------------
 
     } while (jawabanMainLagi == 'y' || jawabanMainLagi == 'Y');
 
@@ -175,7 +164,6 @@ int main() {
 
 void bersihkanLayar() {
     // [MODUL 5] Perulangan (For Loop)
-    // Loop sederhana 60 kali untuk membersihkan layar terminal
     for (int i = 0; i < 60; i++) cout << "\n";
 }
 
@@ -210,7 +198,7 @@ void tampilkanTutorial() {
 
     cout << "\n===============================================\n";
     cout << "Sudah paham? Tekan [Enter] untuk mulai bermain!";
-    cin.ignore(); cin.get(); // Menunggu user tekan enter
+    cin.ignore(); cin.get(); 
 }
 
 void inisialisasiPapan(char papan[JUMLAH_BARIS][JUMLAH_KOLOM]) {
@@ -229,7 +217,6 @@ void gambarPapan(char papan[JUMLAH_BARIS][JUMLAH_KOLOM], int skorP1, int skorP2)
     cout << "  1   2   3   4   5   6   7 \n"; 
     cout << "+---+---+---+---+---+---+---+\n"; 
 
-    // Menggambar papan baris demi baris
     for (int brs = 0; brs < JUMLAH_BARIS; brs++) {
         cout << "|"; 
         for (int klm = 0; klm < JUMLAH_KOLOM; klm++) {
@@ -255,7 +242,6 @@ int prosesJatuhkanKeping(char papan[JUMLAH_BARIS][JUMLAH_KOLOM], int kolomPiliha
 
 bool cekApakahSeri(int totalLangkah) {
     // [MODUL 3] Operator Perkalian (*)
-    // Jika total langkah sama dengan luas papan (6x7 = 42), berarti penuh
     if (totalLangkah == JUMLAH_BARIS * JUMLAH_KOLOM) return true;
     else return false;
 }
@@ -265,7 +251,7 @@ bool cekApakahMenang(char papan[JUMLAH_BARIS][JUMLAH_KOLOM], char keping) {
     for (int brs = 0; brs < JUMLAH_BARIS; brs++) {
         for (int klm = 0; klm < JUMLAH_KOLOM; klm++) {
 
-            // [MODUL 3] Operator Logika AND (&&) memastikan 4 kotak isinya sama
+            // [MODUL 3] Operator Logika AND (&&) 
             // 1. CEK MENDATAR (HORIZONTAL)
             if (klm + 3 < JUMLAH_KOLOM) { 
                 if (papan[brs][klm] == keping && 
