@@ -84,11 +84,11 @@ int main() {
             // Cek apakah user minta tutorial
             if (inputAngka == 0) {
                 tampilkanTutorial();
-                continue; // Jangan ganti giliran, kembali ke gambar papan
+                continue; 
             }
 
             // [MODUL 3] Operator Relasional (<, >) & Logika (||)
-            // --- [TAMBAHAN] PENANGANAN INPUT DI LUAR JANGKAUAN ---
+            // PENANGANAN INPUT DI LUAR JANGKAUAN 
             if (inputAngka < 1 || inputAngka > 7) {
                 cout << "\n[ERROR] Kolom " << inputAngka << " tidak ada! Pilih 1-7.\n";
                 cout << "Tekan [Enter] untuk mencoba lagi...";
@@ -99,19 +99,16 @@ int main() {
             }
 
             // [MODUL 3] Operator Aritmatika (-)
-            // User input 1, tapi index Array mulai dari 0. Jadi dikurang 1.
-            // Fungsi ini juga mengembalikan nilai (return value)
             int hasilJatuh = prosesJatuhkanKeping(papan, inputAngka - 1, keping);
 
-            // --- [TAMBAHAN] PENANGANAN KOLOM PENUH ---
+            // PENANGANAN KOLOM PENUH 
             if (hasilJatuh == -1) {
                 cout << "\n[ERROR] Kolom sudah PENUH! Pilih kolom lain.\n";
                 cout << "Tekan [Enter] untuk lanjut...";
                 
                 cin.ignore(10000, '\n'); // Bersihkan buffer
                 cin.get();               // Pause agar pesan terbaca
-                // Tidak perlu 'continue' di sini karena dia akan otomatis 
-                // melewati blok 'else' di bawah dan looping lagi
+                
             } 
             else {
                 // [MODUL 3] Operator Increment (++)
@@ -126,7 +123,7 @@ int main() {
                     if (pemainAktif == 1) skorP1++; 
                     else skorP2++;
                     
-                    permainanSelesai = true; // Menghentikan while loop
+                    permainanSelesai = true; 
                 } 
                 // Cek kondisi Seri
                 else if (cekApakahSeri(totalLangkah) == true) {
@@ -150,18 +147,17 @@ int main() {
         // Menampilkan Skor Akhir Ronde
         cout << "Skor Saat Ini -> P1: " << skorP1 << " | P2: " << skorP2 << endl;
         
-        // --- [BAGIAN INI YANG SAYA TAMBAHKAN AGAR TIDAK LANGSUNG KELUAR] ---
         while (true) {
             cout << "Apakah ingin main lagi? (y/t): ";
             cin >> jawabanMainLagi;
 
-            // Bersihkan buffer barangkali user ngetik "yesss" panjang
+            // Bersihkan buffer
             if (cin.fail()) { cin.clear(); cin.ignore(10000, '\n'); }
 
-            // Cek apakah inputnya valid (y/Y/t/T)
+            // Cek apakah inputnya valid
             if (jawabanMainLagi == 'y' || jawabanMainLagi == 'Y' || 
                 jawabanMainLagi == 't' || jawabanMainLagi == 'T') {
-                break; // KELUAR dari loop validasi ini dan lanjut ke pengecekan do-while
+                break; 
             } else {
                 cout << "[ERROR] Jawaban tidak dikenali! Hanya ketik 'y' atau 't'.\n";
             }
@@ -175,9 +171,7 @@ int main() {
 }
 
 
-// ==========================================
-//        IMPLEMENTASI FUNGSI (MODUL 7)
-// ==========================================
+// IMPLEMENTASI FUNGSI (MODUL 7)
 
 void bersihkanLayar() {
     // [MODUL 5] Perulangan (For Loop)
@@ -185,7 +179,6 @@ void bersihkanLayar() {
     for (int i = 0; i < 60; i++) cout << "\n";
 }
 
-// Ini adalah Tutorial Lengkap yang tidak dihapus
 void tampilkanTutorial() {
     bersihkanLayar();
     cout << "===============================================\n";
@@ -271,9 +264,9 @@ bool cekApakahSeri(int totalLangkah) {
 bool cekApakahMenang(char papan[JUMLAH_BARIS][JUMLAH_KOLOM], char keping) {
     for (int brs = 0; brs < JUMLAH_BARIS; brs++) {
         for (int klm = 0; klm < JUMLAH_KOLOM; klm++) {
-            
-            // 1. CEK MENDATAR (HORIZONTAL)
+
             // [MODUL 3] Operator Logika AND (&&) memastikan 4 kotak isinya sama
+            // 1. CEK MENDATAR (HORIZONTAL)
             if (klm + 3 < JUMLAH_KOLOM) { 
                 if (papan[brs][klm] == keping && 
                     papan[brs][klm + 1] == keping &&
